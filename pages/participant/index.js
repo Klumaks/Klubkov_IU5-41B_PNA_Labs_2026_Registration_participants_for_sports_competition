@@ -4,10 +4,11 @@ import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
 
 export class ParticipantPage {
-    constructor(parent, id, participants) {
+    constructor(parent, id, appState) {
         this.parent = parent;
         this.id = id;
-        this.participants = participants;
+        this.appState = appState;
+        this.participants = appState.participants;
         this.participant = this.participants.find(p => p.id == id);
     }
 
@@ -22,12 +23,12 @@ export class ParticipantPage {
     }
 
     clickBack() {
-        const mainPage = new MainPage(this.parent);
+        const mainPage = new MainPage(this.parent, this.appState);
         mainPage.render();
     }
 
     clickHome() {
-        const mainPage = new MainPage(this.parent);
+        const mainPage = new MainPage(this.parent, this.appState);
         mainPage.render();
     }
 

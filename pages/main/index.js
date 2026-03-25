@@ -3,9 +3,15 @@ import { ParticipantCardComponent } from "../../components/participant-card/inde
 import { ParticipantPage } from "../participant/index.js";
 
 export class MainPage {
-    constructor(parent) {
+    constructor(parent, appState) {
         this.parent = parent;
-        this.participants = this.getInitialData();
+        this.appState = appState;
+
+        if (!this.appState.participants) {
+            this.appState.participants = this.getInitialData();
+        }
+
+        this.participants = this.appState.participants;
         this.filteredParticipants = [...this.participants];
         this.searchTerm = '';
         this.sportFilter = '';
@@ -129,32 +135,29 @@ export class MainPage {
     }
 
     viewParticipant(id) {
-        const participantPage = new ParticipantPage(this.parent, id, this.participants);
+        const participantPage = new ParticipantPage(this.parent, id, this.appState);
         participantPage.render();
     }
 
     deleteParticipant(id) {
         if (confirm('Вы уверены, что хотите удалить этого участника?')) {
             this.participants = this.participants.filter(p => p.id !== id);
+            this.appState.participants = this.participants;
             this.applyFilters();
         }
     }
 
     addParticipant() {
+        if (this.participants.length === 0) return;
+        const firstParticipant = this.participants[0];
         const newId = Math.max(...this.participants.map(p => p.id), 0) + 1;
         const newParticipant = {
+            ...firstParticipant,
             id: newId,
-            name: "Новый участник",
-            sport: "Футбол",
-            team: "Новая команда",
-            age: 20,
-            photo: "https://avatars.mds.yandex.net/get-shedevrum/12265573/img_1729606723_2_0/orig",
-            achievements: "Нет достижений",
-            registrationDate: new Date().toLocaleDateString('ru-RU'),
-            phone: "+7 (999) 000-00-00",
-            email: "new.participant@example.com"
+            registrationDate: new Date().toLocaleDateString('ru-RU')
         };
         this.participants.push(newParticipant);
+        this.appState.participants = this.participants;
         this.applyFilters();
     }
 

@@ -1,6 +1,9 @@
 import { MainPage } from "./pages/main/index.js";
 
-const root = document.getElementById('root');
+const appState = {
+    participants: null
+};
 
-const mainPage = new MainPage(root);
+const root = document.getElementById('root');
+const mainPage = new MainPage(root, appState);
 mainPage.render();
