@@ -8,9 +8,7 @@ export class ParticipantDetailComponent {
             <div class="participant-detail-page">
                 <div class="row">
                     <div class="col-md-5">
-                        <div style="width:100%; height:300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 96px;">
-                            ${data.name.charAt(0)}
-                        </div>
+                        <img src="./static/avatar.jpg" alt="${data.name}" style="width:100%; height:300px; border-radius:10px; object-fit: cover;">
                     </div>
                     <div class="col-md-7">
                         <div class="detail-info">
