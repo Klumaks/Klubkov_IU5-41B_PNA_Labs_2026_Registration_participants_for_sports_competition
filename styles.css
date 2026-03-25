@@ -4,16 +4,15 @@
   /* задаем отступ от кнопки справа */
   margin-top: 5px;
   /* задаем отступ от кнопки сверху*/
-  width: 50px;
+  width: 70px;
   /* задаем ширину кнопки */
-  height: 50px;
+  height: 70px;
   /* задаем высоту кнопки */
-  border-radius: 50%;
+  border-radius: 70%;
   /* округляем кнопку */
   border: none;
   /* отключаем обводку */
   background: #94a5bf;
-  /* задаем серый цвет кнопки */
   color: white;
   /* задаем белый цвет текста внутри кнопки */
   font-size: 1.5rem;
@@ -42,13 +41,13 @@
 /* селектор для кнопок первостепенных операций */
 .my-btn.primary {
   background: #3577a0;;
-  /* цвет кнопки оранжевый */
+
 }
 
 /* селектор для кнопок второстепенных операций */
 .my-btn.secondary {
   background: #637fa9;
-  /* цвет кнопки сервый */
+
 }
 
 /* селектор для кнопки расчета выражения (=) */
@@ -61,7 +60,7 @@
 
 /* селектор для поля вывода результата */
 .result {
-  width: 220px;
+  width: 295px;
   height: 50px;
   margin-bottom: 15px;
   /* отступ снизу */
@@ -94,7 +93,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 .calculator_body{
     background-color:  #2b4358;
@@ -103,6 +102,6 @@ header {
   border-radius: 10px;
 }
 body{
-  background-color: #1b3042;
+      background: linear-gradient( 90deg, #101b24, #101b24 .01%, #1b3042 30.73%, #1b3042 69.27%, #101d26);
   margin: 0;
 }
