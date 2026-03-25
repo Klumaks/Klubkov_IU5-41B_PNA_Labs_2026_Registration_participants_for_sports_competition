@@ -1,0 +1,23 @@
+{
+  "name": "klubkov_iu5-41b_pna_labs_2026_registration_participants_for_sports_competition",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klumaks/Klubkov_IU5-41B_PNA_Labs_2026_Registration_participants_for_sports_competition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Klumaks/Klubkov_IU5-41B_PNA_Labs_2026_Registration_participants_for_sports_competition/issues"
+  },
+  "homepage": "https://github.com/Klumaks/Klubkov_IU5-41B_PNA_Labs_2026_Registration_participants_for_sports_competition#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "keywords": [],
+  "description": ""
+}
