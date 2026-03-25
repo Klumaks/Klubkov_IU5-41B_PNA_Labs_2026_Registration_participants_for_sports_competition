@@ -52,7 +52,7 @@
 
 /* селектор для кнопки расчета выражения (=) */
 .my-btn.execute {
-  width: 110px;
+  width: 150px;
   /* сделаем кнопку шире других */
   border-radius: 34px;
   /* подкорректируем округлость */
@@ -60,11 +60,12 @@
 
 /* селектор для поля вывода результата */
 .result {
-  width: 295px;
-  height: 50px;
+  width: 290px;
+  height: 70px;
   margin-bottom: 15px;
   /* отступ снизу */
   padding-right: 10px;
+  padding-left: 10px;
   /* выступ справа */
   background: rgb(73, 73, 73);
   /* цвет можно задавать и таким образом */
@@ -93,7 +94,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 .calculator_body{
     background-color:  #2b4358;
@@ -104,4 +105,8 @@ header {
 body{
       background: linear-gradient( 90deg, #101b24, #101b24 .01%, #1b3042 30.73%, #1b3042 69.27%, #101d26);
   margin: 0;
+}
+.my-btn.varianse{
+  width: 310px;
+  border-radius: 34px;
 }
