@@ -2,6 +2,7 @@ import { HeaderComponent } from "../../components/header/index.js";
 import { ParticipantDetailComponent } from "../../components/participant-detail/index.js";
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
+import { ThreeModelComponent } from "../../components/three-model/index.js";
 
 export class ParticipantPage {
     constructor(parent, id, appState) {
@@ -18,7 +19,12 @@ export class ParticipantPage {
 
     getHTML() {
         return `
-            <div id="participant-page" class="calculator_body" style="margin-top: 20px;"></div>
+            <div id="participant-page" class="calculator_body" style="margin-top: 20px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+                    <div style="flex: 2; min-width: 280px;" id="detail-container"></div>
+                    <div style="flex: 1; min-width: 280px;" id="model-container"></div>
+                </div>
+            </div>
         `;
     }
 
@@ -41,11 +47,20 @@ export class ParticipantPage {
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
 
-        if (this.participant) {
-            const participantDetail = new ParticipantDetailComponent(this.pageRoot);
+        const detailContainer = document.getElementById('detail-container');
+        if (detailContainer && this.participant) {
+            const participantDetail = new ParticipantDetailComponent(detailContainer);
             participantDetail.render(this.participant);
-        } else {
-            this.pageRoot.innerHTML = '<div style="text-align:center; padding:40px;">Участник не найден</div>';
+        } else if (!this.participant) {
+            if (detailContainer) {
+                detailContainer.innerHTML = '<div style="text-align:center; padding:40px;">Участник не найден</div>';
+            }
+        }
+
+        const modelContainer = document.getElementById('model-container');
+        if (modelContainer && this.participant) {
+            const threeModel = new ThreeModelComponent(modelContainer);
+            threeModel.render(this.participant);
         }
 
         const backButton = new BackButtonComponent(this.pageRoot);

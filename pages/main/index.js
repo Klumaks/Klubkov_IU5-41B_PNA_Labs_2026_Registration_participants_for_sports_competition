@@ -36,7 +36,7 @@ export class MainPage {
                 name: "Анна Сидорова",
                 sport: "Теннис",
                 team: "Динамо",
-                age: 22,
+                age: 17,
                 photo: "https://avatars.mds.yandex.net/get-shedevrum/12265565/img_1729606723_2_0/orig",
                 achievements: "Победитель турнира 2024, 3-й разряд",
                 registrationDate: "20.01.2024",
