@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Иван Петров",
+    "sport": "Футбол",
+    "team": "Спартак",
+    "age": 25,
+    "photo": "./static/avatar.jpg",
+    "achievements": "Чемпион области 2023, Лучший бомбардир",
+    "registrationDate": "15.01.2024",
+    "phone": "+7 (999) 123-45-67",
+    "email": "ivan.petrov@example.com"
+  },
+  {
+    "id": 2,
+    "name": "Анна Сидорова",
+    "sport": "Теннис",
+    "team": "Динамо",
+    "age": 22,
+    "photo": "./static/avatar.jpg",
+    "achievements": "Победитель турнира 2024, 3-й разряд",
+    "registrationDate": "20.01.2024",
+    "phone": "+7 (999) 234-56-78",
+    "email": "anna.sidorova@example.com"
+  },
+  {
+    "id": 3,
+    "name": "Михаил Козлов",
+    "sport": "Баскетбол",
+    "team": "ЦСКА",
+    "age": 28,
+    "photo": "./static/avatar.jpg",
+    "achievements": "MVP сезона 2023, Чемпион России",
+    "registrationDate": "10.01.2024",
+    "phone": "+7 (999) 345-67-89",
+    "email": "mikhail.kozlov@example.com"
+  },
+  {
+    "id": 4,
+    "name": "Елена Волкова",
+    "sport": "Плавание",
+    "team": "Локомотив",
+    "age": 19,
+    "photo": "./static/avatar.jpg",
+    "achievements": "Мастер спорта, Рекордсменка области",
+    "registrationDate": "05.01.2024",
+    "phone": "+7 (999) 456-78-90",
+    "email": "elena.volkova@example.com"
+  },
+  {
+    "id": 5,
+    "name": "Дмитрий Соколов",
+    "sport": "Легкая атлетика",
+    "team": "Торпедо",
+    "age": 26,
+    "photo": "./static/avatar.jpg",
+    "achievements": "Призер чемпионата России, КМС",
+    "registrationDate": "25.01.2024",
+    "phone": "+7 (999) 567-89-01",
+    "email": "dmitry.sokolov@example.com"
+  }
+]
