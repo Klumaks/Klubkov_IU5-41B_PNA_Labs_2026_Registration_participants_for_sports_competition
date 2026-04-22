@@ -40,13 +40,12 @@
 
 /* селектор для кнопок первостепенных операций */
 .my-btn.primary {
-  background: #3577a0;;
-
+  background: #d41a1a;
 }
 
 /* селектор для кнопок второстепенных операций */
 .my-btn.secondary {
-  background: #3577a0;;
+  background: #d41a1a;
 
 }
 
