@@ -3,24 +3,25 @@ export class ParticipantStatsComponent {
         this.parent = parent;
     }
 
-    calculateTotalPoints(resultsMatrix) {
-        if (!resultsMatrix || resultsMatrix.length === 0) return 0;
-
-        let totalPoints = 0;
-        const n = resultsMatrix.length;
-
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
-                totalPoints += resultsMatrix[i][j];
+    // Сумма главной и побочной диагоналей квадратной матрицы (do-while)
+    calculateDiagonalSum(matrix) {
+        if (!matrix || matrix.length === 0) return 0;
+        const n = matrix.length;
+        let sum = 0;
+        let i = 0;
+        do {
+            sum += matrix[i][i];
+            if (i !== n - 1 - i) {
+                sum += matrix[i][n - 1 - i];
             }
-        }
-
-        return totalPoints;
+            i++;
+        } while (i < n);
+        return sum;
     }
 
+    // Слияние объектов (значение, встретившееся раньше)
     mergeParticipantData(...objects) {
         const result = {};
-
         for (const obj of objects) {
             for (const key in obj) {
                 if (!(key in result)) {
@@ -28,19 +29,17 @@ export class ParticipantStatsComponent {
                 }
             }
         }
-
         return result;
     }
 
+    // Генерация квадратной матрицы результатов (3x3)
     generateResultsMatrix(participant) {
         const tournaments = [
             { name: "Чемпионат области", stages: 3 },
             { name: "Кубок России", stages: 3 },
             { name: "Первенство города", stages: 3 }
         ];
-
         const matrix = [];
-
         for (let i = 0; i < tournaments.length; i++) {
             const row = [];
             for (let j = 0; j < tournaments[i].stages; j++) {
@@ -51,7 +50,6 @@ export class ParticipantStatsComponent {
             }
             matrix.push(row);
         }
-
         return {
             matrix,
             tournamentNames: tournaments.map(t => t.name)
@@ -60,7 +58,7 @@ export class ParticipantStatsComponent {
 
     getParticipantStats(participant) {
         const results = this.generateResultsMatrix(participant);
-        const totalPoints = this.calculateTotalPoints(results.matrix);
+        const totalPoints = this.calculateDiagonalSum(results.matrix);
 
         const personalData = {
             fullName: participant.name,
@@ -68,25 +66,20 @@ export class ParticipantStatsComponent {
             category: this.getAgeCategory(participant.age),
             sportType: participant.sport
         };
-
         const teamData = {
             team: participant.team,
             teamCategory: this.getTeamCategory(participant.team),
             hasTeamSupport: participant.team !== 'Индивидуально'
         };
-
         const achievementsData = {
             achievements: participant.achievements,
             title: this.getSportsTitle(participant.achievements),
-            isAwardWinner: participant.achievements.includes('чемпион') || participant.achievements.includes('призер')
+            isAwardWinner: participant.achievements.toLowerCase().includes('чемпион') || participant.achievements.toLowerCase().includes('призер')
         };
-
         const mergedData = this.mergeParticipantData(personalData, teamData, achievementsData);
 
         return {
             totalPoints,
-            resultsMatrix: results.matrix,
-            tournamentNames: results.tournamentNames,
             mergedData
         };
     }
@@ -112,44 +105,24 @@ export class ParticipantStatsComponent {
     getSportsTitle(achievements) {
         if (achievements.includes('Мастер спорта')) return 'Мастер спорта';
         if (achievements.includes('КМС')) return 'Кандидат в мастера спорта';
-        if (achievements.includes('чемпион')) return 'Чемпион';
-        if (achievements.includes('призер')) return 'Призер соревнований';
+        if (achievements.toLowerCase().includes('чемпион')) return 'Чемпион';
+        if (achievements.toLowerCase().includes('призер')) return 'Призер соревнований';
         return 'Спортсмен';
     }
 
+    // HTML: уменьшенный шрифт и понятный бизнес-смысл
     getHTML(participant, stats) {
         return `
             <div class="participant-stats" style="margin-top: 15px; padding: 10px; background: #1b3042; border-radius: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="color: #94a5bf; font-size: 12px;">Турнирная статистика</span>
-                    <span style="color: #2ecc71; font-size: 14px; font-weight: bold;">Всего очков: ${stats.totalPoints}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #94a5bf; font-size: 11px;">Турнирная статистика</span>
+                    <span style="color: #2ecc71; font-size: 13px; font-weight: bold;">Итоговые очки: ${stats.totalPoints}</span>
                 </div>
-
-                <div style="font-size: 11px; color: #94a5bf;">
-                    <div> Категория: ${stats.mergedData.category}</div>
-                    <div> Спортивное звание: ${stats.mergedData.title}</div>
-                    <div> Команда: ${stats.mergedData.teamCategory}</div>
-                    <div> Награды: ${stats.mergedData.isAwardWinner ? 'Есть' : 'Нет'}</div>
-                </div>
-
-                <div style="margin-top: 10px;">
-                    <div style="font-size: 11px; color: #637fa9; margin-bottom: 5px;">Результаты по турнирам:</div>
-                    <table style="width: 100%; font-size: 10px; color: #94a5bf; border-collapse: collapse;">
-                        <thead>
-                            <tr>
-                                <th style="padding: 4px; border: 1px solid #2b4358;">Турнир</th>
-                                ${stats.tournamentNames.map((_, idx) => `<th style="padding: 4px; border: 1px solid #2b4358;">Этап ${idx + 1}</th>`).join('')}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${stats.resultsMatrix.map((row, idx) => `
-                                <tr>
-                                    <td style="padding: 4px; border: 1px solid #2b4358;">${stats.tournamentNames[idx]}</td>
-                                    ${row.map(cell => `<td style="padding: 4px; border: 1px solid #2b4358; text-align: center;">${cell}</td>`).join('')}
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
+                <div style="font-size: 10px; color: #94a5bf;">
+                    <div>Категория: ${stats.mergedData.category}</div>
+                    <div>Спортивное звание: ${stats.mergedData.title}</div>
+                    <div>Команда: ${stats.mergedData.teamCategory}</div>
+                    <div>Награды: ${stats.mergedData.isAwardWinner ? 'Есть' : 'Нет'}</div>
                 </div>
             </div>
         `;

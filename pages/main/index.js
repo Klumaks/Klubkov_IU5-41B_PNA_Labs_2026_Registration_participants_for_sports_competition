@@ -90,14 +90,15 @@ export class MainPage {
         return `
             <div id="main-page">
                 <div class="filter-bar">
-                    <input type="text" id="search-input" placeholder=" Поиск по имени участника...">
+                    <input type="text" id="search-input" placeholder="Поиск по имени участника...">
+                    <button id="search-name-btn" class="my-btn execute">Поиск</button>
                     <select id="sport-filter">
                         <option value="">Все виды спорта</option>
-                        <option value="Футбол"> Футбол</option>
-                        <option value="Баскетбол"> Баскетбол</option>
-                        <option value="Теннис"> Теннис</option>
-                        <option value="Плавание"> Плавание</option>
-                        <option value="Легкая атлетика"> Легкая атлетика</option>
+                        <option value="Футбол">Футбол</option>
+                        <option value="Баскетбол">Баскетбол</option>
+                        <option value="Теннис">Теннис</option>
+                        <option value="Плавание">Плавание</option>
+                        <option value="Легкая атлетика">Легкая атлетика</option>
                     </select>
                     <button id="add-participant" class="my-btn execute">+ Добавить участника</button>
                 </div>
@@ -106,12 +107,46 @@ export class MainPage {
         `;
     }
 
+    // Поиск по имени с использованием do-while (цикл с постусловием)
+    searchByNameWithDoWhile(keyword) {
+        this.searchTerm = keyword;
+        if (!keyword.trim()) {
+            this.filteredParticipants = [...this.participants];
+            this.renderParticipants();
+            return;
+        }
+        const lowerKeyword = keyword.toLowerCase();
+        const results = [];
+        let i = 0;
+        do {
+            const participant = this.participants[i];
+            if (participant && participant.name.toLowerCase().includes(lowerKeyword)) {
+                results.push(participant);
+            }
+            i++;
+        } while (i < this.participants.length);
+
+        // Применяем также фильтр по виду спорта
+        if (this.sportFilter) {
+            this.filteredParticipants = results.filter(p => p.sport === this.sportFilter);
+        } else {
+            this.filteredParticipants = results;
+        }
+        this.renderParticipants();
+    }
+
     applyFilters() {
-        this.filteredParticipants = this.participants.filter(participant => {
-            const matchesSearch = participant.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-            const matchesSport = !this.sportFilter || participant.sport === this.sportFilter;
-            return matchesSearch && matchesSport;
-        });
+        // Сначала фильтр по спорту
+        let filtered = this.participants;
+        if (this.sportFilter) {
+            filtered = filtered.filter(p => p.sport === this.sportFilter);
+        }
+        // Затем фильтр по имени (если есть поисковый запрос)
+        if (this.searchTerm.trim()) {
+            const lowerKeyword = this.searchTerm.toLowerCase();
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(lowerKeyword));
+        }
+        this.filteredParticipants = filtered;
         this.renderParticipants();
     }
 
@@ -162,18 +197,23 @@ export class MainPage {
     }
 
     setupEventListeners() {
+        // Кнопка поиска по имени (использует do-while)
+        const searchBtn = document.getElementById('search-name-btn');
         const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                this.searchTerm = e.target.value;
-                this.applyFilters();
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', () => {
+                this.searchByNameWithDoWhile(searchInput.value);
             });
         }
 
+        // Фильтр по виду спорта
         const sportFilter = document.getElementById('sport-filter');
         if (sportFilter) {
             sportFilter.addEventListener('change', (e) => {
                 this.sportFilter = e.target.value;
+                // Применяем текущий поисковый запрос (без do-while, обычным filter)
+                const searchInputValue = document.getElementById('search-input')?.value || '';
+                this.searchTerm = searchInputValue;
                 this.applyFilters();
             });
         }
