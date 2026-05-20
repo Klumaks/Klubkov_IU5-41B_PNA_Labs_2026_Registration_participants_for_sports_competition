@@ -51,7 +51,7 @@ class ParticipantsController {
                 sport,
                 team,
                 age: parseInt(age),
-                photo: photo || './static/avatar.jpg',
+                photo: photo || 'https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg',
                 achievements: achievements || 'Нет достижений',
                 phone: phone || 'Не указан',
                 email: email || 'Не указан'
