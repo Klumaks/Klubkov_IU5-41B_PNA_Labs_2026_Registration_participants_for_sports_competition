@@ -175,11 +175,11 @@ export class MainPage {
     }
 
     deleteParticipant(id) {
-        if (confirm('Вы уверены, что хотите удалить этого участника?')) {
+
             this.participants = this.participants.filter(p => p.id !== id);
             this.appState.participants = this.participants;
             this.applyFilters();
-        }
+        
     }
 
     addParticipant() {
