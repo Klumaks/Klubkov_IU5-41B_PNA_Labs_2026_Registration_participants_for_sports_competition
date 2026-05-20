@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -16,8 +18,12 @@
   },
   "homepage": "https://github.com/Klumaks/Klubkov_IU5-41B_PNA_Labs_2026_Registration_participants_for_sports_competition#readme",
   "dependencies": {
-    "bootstrap": "^5.3.8"
+    "bootstrap": "^5.3.8",
+    "three": "^0.184.0"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "vite": "^8.0.13"
+  }
 }

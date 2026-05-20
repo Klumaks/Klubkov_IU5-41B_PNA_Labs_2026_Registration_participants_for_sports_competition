@@ -3,7 +3,7 @@ import { ParticipantDetailComponent } from "../../components/participant-detail/
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
 import { ThreeModelComponent } from "../../components/three-model/index.js";
-import { ajax } from "../../modules/ajax.js";
+import { fetchService } from "../../modules/fetchService.js";
 import { participantUrls } from "../../modules/participantUrls.js";
 
 export class ParticipantPage {
@@ -29,18 +29,17 @@ export class ParticipantPage {
         `;
     }
 
-    loadParticipant() {
+    async loadParticipant() {
         const url = participantUrls.getParticipantById(this.id);
-        ajax.get(url, (data, status) => {
-            if (status === 200 && data) {
-                this.participant = data;
-                this.renderParticipantData();
-            } else if (status === 404) {
-                document.getElementById('detail-container').innerHTML = '<div style="text-align:center; padding:40px;">Участник не найден</div>';
-            } else {
-                console.error('Ошибка загрузки', status);
-            }
-        });
+        const { data, status } = await fetchService.get(url);
+        if (status === 200 && data) {
+            this.participant = data;
+            this.renderParticipantData();
+        } else if (status === 404) {
+            document.getElementById('detail-container').innerHTML = '<div style="text-align:center; padding:40px;">Участник не найден</div>';
+        } else {
+            console.error('Ошибка загрузки', status);
+        }
     }
 
     renderParticipantData() {

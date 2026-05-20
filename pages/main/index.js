@@ -2,14 +2,14 @@ import { HeaderComponent } from "../../components/header/index.js";
 import { ParticipantCardComponent } from "../../components/participant-card/index.js";
 import { ParticipantPage } from "../participant/index.js";
 import { FormPage } from "../form/index.js";
-import { ajax } from "../../modules/ajax.js";
+import { fetchService } from "../../modules/fetchService.js";
 import { participantUrls } from "../../modules/participantUrls.js";
 
 export class MainPage {
     constructor(parent, appState) {
         this.parent = parent;
         this.appState = appState;
-        this.allParticipants = [];      // все участники с сервера
+        this.allParticipants = [];
         this.currentSportFilter = '';
         this.currentSearchTerm = '';
     }
@@ -39,31 +39,26 @@ export class MainPage {
         `;
     }
 
-    // Загрузка участников с сервера (только один раз при загрузке страницы)
-    loadParticipants() {
+    async loadParticipants() {
         const url = participantUrls.getParticipants();
-        ajax.get(url, (data, status) => {
-            if (status === 200 && data) {
-                this.allParticipants = data;
-                this.applyFiltersAndRender();
-            } else {
-                console.error('Ошибка загрузки участников', status);
-                const container = document.getElementById('participants-container');
-                if (container) {
-                    container.innerHTML = '<div style="text-align:center; padding:40px;">Ошибка загрузки данных</div>';
-                }
+        const { data, status } = await fetchService.get(url);
+        if (status === 200 && data) {
+            this.allParticipants = data;
+            this.applyFiltersAndRender();
+        } else {
+            console.error('Ошибка загрузки участников', status);
+            const container = document.getElementById('participants-container');
+            if (container) {
+                container.innerHTML = '<div style="text-align:center; padding:40px;">Ошибка загрузки данных</div>';
             }
-        });
+        }
     }
 
-    // Применяет фильтры к allParticipants и рисует
     applyFiltersAndRender() {
         let filtered = [...this.allParticipants];
-        // Фильтр по виду спорта
         if (this.currentSportFilter) {
             filtered = filtered.filter(p => p.sport === this.currentSportFilter);
         }
-        // Поиск по имени (do-while)
         if (this.currentSearchTerm.trim()) {
             const keyword = this.currentSearchTerm.toLowerCase();
             const results = [];
@@ -109,17 +104,15 @@ export class MainPage {
         formPage.render();
     }
 
-    deleteParticipant(id) {
+    async deleteParticipant(id) {
         const url = participantUrls.deleteParticipant(id);
-        ajax.delete(url, (data, status) => {
-            if (status === 204) {
-                // Удаляем участника из локального массива и перерисовываем
-                this.allParticipants = this.allParticipants.filter(p => p.id !== id);
-                this.applyFiltersAndRender();  // перерисовка без нового GET
-            } else {
-                console.error('Ошибка удаления', status);
-            }
-        });
+        const { status } = await fetchService.delete(url);
+        if (status === 204) {
+            this.allParticipants = this.allParticipants.filter(p => p.id !== id);
+            this.applyFiltersAndRender();
+        } else {
+            console.error('Ошибка удаления', status);
+        }
     }
 
     addParticipant() {
@@ -158,6 +151,6 @@ export class MainPage {
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
         this.setupEventListeners();
-        this.loadParticipants(); // единственный GET-запрос
+        this.loadParticipants();
     }
 }

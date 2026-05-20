@@ -8,7 +8,7 @@ export class ParticipantCardComponent {
     getHTML(data) {
         return `
             <div class="participant-card" id="participant-card-${data.id}">
-                <img src="${data.photo || './static/avatar.jpg'}" alt="${data.name}" style="width: 100%; height: 200px; object-fit: cover;">
+                <img src="${data.photo || 'https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg'}" alt="${data.name}" style="width: 100%; height: 200px; object-fit: cover;">
                 <div class="participant-info">
                     <div class="participant-name">${data.name}</div>
                     <div class="participant-detail">Вид спорта: ${data.sport}</div>

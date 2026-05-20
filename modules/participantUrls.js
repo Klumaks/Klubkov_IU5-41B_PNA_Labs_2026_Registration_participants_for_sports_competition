@@ -1,6 +1,6 @@
 class ParticipantUrls {
     constructor() {
-        this.baseUrl = 'http://localhost:3001'; 
+        this.baseUrl = 'http://localhost:3002';
     }
 
     getParticipants(sport = '') {

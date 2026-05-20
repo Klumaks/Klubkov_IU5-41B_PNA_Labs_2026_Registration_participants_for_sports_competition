@@ -10,7 +10,7 @@ export class ParticipantDetailComponent {
             <div class="participant-detail-page" id="participant-detail-${data.id}">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="${data.photo || './static/avatar.jpg'}" alt="${data.name}" style="width:100%; height:300px; border-radius:10px; object-fit: cover;">
+                        <img src="${data.photo || 'https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg'}" alt="${data.name}" style="width:100%; height:300px; border-radius:10px; object-fit: cover;">
                     </div>
                     <div class="col-md-7">
                         <div class="detail-info">
