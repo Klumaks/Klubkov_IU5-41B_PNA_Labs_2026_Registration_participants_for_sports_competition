@@ -19,5 +19,8 @@
     "bootstrap": "^5.3.8"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "vite": "^8.0.13"
+  }
 }

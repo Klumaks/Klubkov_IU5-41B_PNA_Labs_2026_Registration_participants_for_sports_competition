@@ -136,11 +136,11 @@ export class FormPage {
         `;
         document.head.appendChild(style);
 
-        const backButton = new BackButtonComponent(this.pageRoot);
-        backButton.render(this.clickBack.bind(this));
+        // const backButton = new BackButtonComponent(this.pageRoot);
+        // backButton.render(this.clickBack.bind(this));
 
-        if (this.id) {
-            this.loadParticipantForEdit();
-        }
+        // if (this.id) {
+        //     this.loadParticipantForEdit();
+        // }
     }
 }
