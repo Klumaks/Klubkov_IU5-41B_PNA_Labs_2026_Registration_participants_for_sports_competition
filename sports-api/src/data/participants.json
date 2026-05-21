@@ -27,7 +27,7 @@
     "id": 3,
     "name": "Михаил Козлов",
     "sport": "Баскетбол",
-    "team": "ЦСКА",
+    "team": "Цпп",
     "age": 28,
     "photo": "https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg",
     "achievements": "MVP сезона 2023, Чемпион России",
@@ -67,20 +67,8 @@
     "age": 24,
     "photo": "https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg",
     "achievements": "Чемпион города 2024",
-    "phone": "+7 (999) 888-77-66",
+    "phone": "+7 (999) 888-77-55",
     "email": "petr.sidorov@example.com",
     "registrationDate": "22.04.2026"
-  },
-  {
-    "id": 7,
-    "name": "ццц",
-    "sport": "ццц",
-    "team": "ццц",
-    "age": 22,
-    "photo": "https://minsknews.by/wp-content/uploads/2024/08/photo_2024-08-03_09-05-59.jpg",
-    "achievements": "222",
-    "phone": "22222",
-    "email": "2222",
-    "registrationDate": "21.05.2026"
   }
 ]
