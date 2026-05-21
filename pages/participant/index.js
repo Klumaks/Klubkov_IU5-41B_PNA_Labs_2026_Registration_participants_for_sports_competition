@@ -70,8 +70,6 @@ export class ParticipantPage {
         });
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
-        const backButton = new BackButtonComponent(this.pageRoot);
-        backButton.render(this.clickBack.bind(this));
-        this.loadParticipant();
+        
     }
 }

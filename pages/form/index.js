@@ -198,12 +198,6 @@ export class FormPage {
         `;
         document.head.appendChild(style);
 
-        const backButton = new BackButtonComponent(this.pageRoot);
-        backButton.render(this.clickBack.bind(this));
-        this.setupEventListeners();
-
-        if (this.id) {
-            this.loadParticipantForEdit();
-        }
+        
     }
 }
